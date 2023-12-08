@@ -13,7 +13,10 @@
 
 // --------------------------------------------------------
 // 预声明
-#define _TESTDATA_ 1  // stdin redirect testdata/
+// stdin redirect testdata/
+#ifndef _TESTDATA_
+#define _TESTDATA_ 1  // 1: Open, 0: Close
+#endif
 
 struct Player;
 
@@ -29,13 +32,21 @@ using sysclock = std::chrono::system_clock;
 struct Player {
   usize no;
   string name;
+
+  string stringify() {
+    string ret;
+    ret += "[no: " + std::to_string(no);
+    ret += ", name: " + name;
+    ret += "] ready to answer !!\n";
+    return ret;
+  }
 };
 
 // --------------------------------------------------------
 // Fn: 快速抢答
 // Tip: 一次只能有一个玩家抢到回答的机会
 void quickans() {
-#ifdef _TESTDATA_
+#if _TESTDATA_
   // set testdata/xxx.in -> stdin
   freopen("./testdata/quickans.in", "r", stdin);
 #endif
@@ -52,7 +63,7 @@ void quickans() {
   }
 
   // close stdin
-#ifdef _TESTDATA_
+#if _TESTDATA_
   fclose(stdin);
 #endif
 
@@ -63,21 +74,16 @@ void quickans() {
 
   // Lambda: 倒计时
   auto countdown = [](usize delay) {
+    usize second = 1;
     while (delay > 0) {
       std::cout << delay << " seconds left !!\n";
-      std::this_thread::sleep_for(std::chrono::seconds(1));
-      delay -= 1;
+      std::this_thread::sleep_for(std::chrono::seconds(second));
+      delay -= second;
     }
   };
 
   // Lambda: 显示抢答成功的玩家信息
-  auto rush = [](Player who) {
-    string desc;
-    desc += "[No." + std::to_string(who.no);
-    desc += ", " + who.name;
-    desc += "] ready to answer !!\n";
-    std::cout << desc;
-  };
+  auto rush = [](Player who) { std::cout << who.stringify(); };
 
   // Lambda: 准备抢答
   auto ready = [&start, &rush](Player who, std::once_flag *flag) {

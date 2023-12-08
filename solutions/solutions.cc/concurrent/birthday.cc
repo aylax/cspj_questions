@@ -11,7 +11,10 @@
 
 // --------------------------------------------------------
 // 预声明
-#define _TESTDATA_ 1  // stdin redirect testdata/
+// stdin redirect testdata/
+#ifndef _TESTDATA_
+#define _TESTDATA_ 1  // 1: Open, 0: Close
+#endif
 
 // --------------------------------------------------------
 // 设定类型别名
@@ -25,8 +28,8 @@ using array = std::vector<string>;
 // --------------------------------------------------------
 // Fn: Happy Birthday
 void happy_birthday() {
-#ifdef _TESTDATA_
-  // set birthday.in -> stdin
+#if _TESTDATA_
+  // set ./testdata/xxx.in -> stdin
   freopen("./testdata/birthday.in", "r", stdin);
 #endif
   // N blessings
@@ -41,7 +44,7 @@ void happy_birthday() {
   }
 
   // close stdin
-#ifdef _TESTDATA_
+#if _TESTDATA_
   fclose(stdin);
 #endif
 
