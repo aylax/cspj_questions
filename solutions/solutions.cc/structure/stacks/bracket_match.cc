@@ -14,7 +14,7 @@
 // 预声明
 // stdin redirect testdata/
 #ifndef _TESTDATA_
-#define _TESTDATA_ 1  // 1: Open, 0: Close
+#define _TESTDATA_ 0  // 1: Open, 0: Close
 #endif
 
 // --------------------------------------------------------
