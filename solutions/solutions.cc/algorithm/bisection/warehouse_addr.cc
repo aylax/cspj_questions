@@ -9,6 +9,10 @@
 #include <vector>
 // --------------------------------------------------------
 // 预声明
+// stdin redirect testdata/
+#ifndef _TESTDATA_
+#define _TESTDATA_ 0  // 1: Open, 0: Close
+#endif
 
 // --------------------------------------------------------
 // 设定类型别名
@@ -24,6 +28,11 @@ using array = std::vector<value>;
 // 题解: 二分法思想
 // 货仓应该在排好序的列表的中间位置
 void warehouse_addr() {
+#if _TESTDATA_
+  // set ./testdata/.../xxx.in -> stdin
+  freopen("./testdata/algorithm/warehouse_addr.in", "r", stdin);
+#endif
+
   usize n;
   std::cin >> n;
 
@@ -32,6 +41,11 @@ void warehouse_addr() {
   for (usize i = 0; i < n; i++) {
     std::cin >> arr[i];
   }
+
+  // close stdin
+#if _TESTDATA_
+  fclose(stdin);
+#endif
 
   // 升序排序
   // Lambda: Compare(a, b)

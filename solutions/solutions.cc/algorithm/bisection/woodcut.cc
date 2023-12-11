@@ -9,6 +9,10 @@
 
 // --------------------------------------------------------
 // 预声明
+// stdin redirect testdata/
+#ifndef _TESTDATA_
+#define _TESTDATA_ 0  // 1: Open, 0: Close
+#endif
 
 // --------------------------------------------------------
 // 设定类型别名
@@ -24,6 +28,11 @@ value max(value a, value b) { return a > b ? a : b; }
 // Fn: 伐木工人问题
 // 题解: 二分查找
 void woodcut() {
+#if _TESTDATA_
+  // set ./testdata/.../xxx.in -> stdin
+  freopen("./testdata/algorithm/woodcut.in", "r", stdin);
+#endif
+
   usize n, required;  // 树木数量, 需求木材长度
   std::cin >> n >> required;
   array arr(n);
@@ -34,6 +43,11 @@ void woodcut() {
     std::cin >> arr[i];
     high = max(high, arr[i]);
   }
+
+  // close stdin
+#if _TESTDATA_
+  fclose(stdin);
+#endif
 
   // Lambda: 判段是否达标
   auto gt_or_eq = [&n, &required, &arr](value val) {

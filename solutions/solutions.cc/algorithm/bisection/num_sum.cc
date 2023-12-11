@@ -9,6 +9,10 @@
 
 // --------------------------------------------------------
 // 预声明
+// stdin redirect testdata/
+#ifndef _TESTDATA_
+#define _TESTDATA_ 0  // 1: Open, 0: Close
+#endif
 
 // --------------------------------------------------------
 // 设定类型别名
@@ -49,6 +53,11 @@ usize binary_search(array &arr, value &val) {
 // Fn: 数求和问题
 // 题解: 二分查找
 void num_sum() {
+#if _TESTDATA_
+  // set ./testdata/.../xxx.in -> stdin
+  freopen("./testdata/algorithm/num_sum.in", "r", stdin);
+#endif
+
   usize n;
   std::cin >> n;
 
@@ -61,6 +70,11 @@ void num_sum() {
   value k, s;
 
   std::cin >> k >> s;
+
+  // close stdin
+#if _TESTDATA_
+  fclose(stdin);
+#endif
 
   value x = s - k;
 

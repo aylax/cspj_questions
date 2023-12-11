@@ -9,6 +9,10 @@
 
 // --------------------------------------------------------
 // 预声明
+// stdin redirect testdata/
+#ifndef _TESTDATA_
+#define _TESTDATA_ 0  // 1: Open, 0: Close
+#endif
 
 // --------------------------------------------------------
 // 设定类型别名
@@ -49,6 +53,11 @@ usize binary_search(array &arr, value &val) {
 // Fn: N个数中找K个数问题
 // 题解: 二分查找
 void find_kn() {
+#if _TESTDATA_
+  // set ./testdata/.../xxx.in -> stdin
+  freopen("./testdata/algorithm/find_kn.in", "r", stdin);
+#endif
+
   usize n, k;
   std::cin >> n >> k;
 
@@ -63,6 +72,11 @@ void find_kn() {
   for (usize i = 0; i < k; i++) {
     std::cin >> karr[i];
   }
+
+  // close stdin
+#if _TESTDATA_
+  fclose(stdin);
+#endif
 
   // 二分查找元素, 并输出 karr[0]
   usize index = binary_search(narr, karr[0]);

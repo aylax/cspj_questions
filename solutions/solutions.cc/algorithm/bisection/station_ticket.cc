@@ -10,6 +10,10 @@
 
 // --------------------------------------------------------
 // 预声明
+// stdin redirect testdata/
+#ifndef _TESTDATA_
+#define _TESTDATA_ 0  // 1: Open, 0: Close
+#endif
 
 // --------------------------------------------------------
 // 设定类型别名
@@ -40,6 +44,11 @@ using array = std::vector<value>;
 //        Low = MTC + 1;
 // clang-format on
 void station_ticket() {
+#if _TESTDATA_
+  // set ./testdata/.../xxx.in -> stdin
+  freopen("./testdata/algorithm/station_ticket.in", "r", stdin);
+#endif
+
   usize n, m;  // n个窗口, m个用户
   std::cin >> n >> m;
 
@@ -48,6 +57,11 @@ void station_ticket() {
   for (usize i = 0; i < n; i++) {
     std::cin >> arr[i];
   }
+
+  // close stdin
+#if _TESTDATA_
+  fclose(stdin);
+#endif
 
   // 按照窗口处理速度排序 (升序排列)
   // Lambda: Compare(a, b)
