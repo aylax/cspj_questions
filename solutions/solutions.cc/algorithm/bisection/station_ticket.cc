@@ -14,8 +14,8 @@
 // --------------------------------------------------------
 // 设定类型别名
 using usize = int;
-using Value = long long;
-using array = std::vector<Value>;
+using value = long long;
+using array = std::vector<value>;
 
 // --------------------------------------------------------
 // 定义对象
@@ -51,14 +51,14 @@ void station_ticket() {
 
   // 按照窗口处理速度排序 (升序排列)
   // Lambda: Compare(a, b)
-  auto cmp = [](Value &a, Value &b) -> bool { return a < b; };
+  auto cmp = [](value &a, value &b) -> bool { return a < b; };
   std::sort(arr.begin(), arr.end(), cmp);
 
-  Value sstc = arr[0] * m;     // 单窗口最短处理时间
-  Value low = 0, high = sstc;  // 界定查找时间范围
-  Value stc = sstc;            // 记录全局最短耗时
+  value sstc = arr[0] * m;     // 单窗口最短处理时间
+  value low = 0, high = sstc;  // 界定查找时间范围
+  value stc = sstc;            // 记录全局最短耗时
 
-  Value mtc;  // 中间耗时
+  value mtc;  // 中间耗时
   while (low <= high) {
     mtc = (low + high) >> 1;  // low 和 high 中位数
     usize k = 0;  // 统计: MTC时间内, N个窗口能够处理的人数

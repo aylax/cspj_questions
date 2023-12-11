@@ -34,8 +34,8 @@ struct answer {
 // 题解: 滑动窗口思路
 void mono_queue() {
 #if _TESTDATA_
-  // set testdata/xxx.in -> stdin
-  freopen("./testdata/mono_queue.in", "r", stdin);
+  // set ./testdata/.../xxx.in -> stdin
+  freopen("./testdata/structure/mono_queue.in", "r", stdin);
 #endif
 
   usize n, k;  // 元素个数 n, 片段长度 m

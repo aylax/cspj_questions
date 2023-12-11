@@ -30,8 +30,8 @@ using array = std::vector<value>;
 // 题解: 就近匹配思路
 void mono_stack() {
 #if _TESTDATA_
-  // set testdata/xxx.in -> stdin
-  freopen("./testdata/mono_stack.in", "r", stdin);
+  // set ./testdata/.../xxx.in -> stdin
+  freopen("./testdata/structure/mono_stack.in", "r", stdin);
 #endif
 
   usize n;  // 元素个数 n

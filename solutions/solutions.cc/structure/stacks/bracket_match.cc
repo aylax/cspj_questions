@@ -33,8 +33,8 @@ using array = std::vector<string>;
 // 题解: 就近匹配思路
 void bracket_match() {
 #if _TESTDATA_
-  // set testdata/xxx.in -> stdin
-  freopen("./testdata/bracket_match.in", "r", stdin);
+  // set ./testdata/.../xxx.in -> stdin
+  freopen("./testdata/structure/bracket_match.in", "r", stdin);
 #endif
 
   usize n;  // 元素个数 n

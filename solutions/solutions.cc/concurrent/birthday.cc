@@ -29,8 +29,8 @@ using array = std::vector<string>;
 // Fn: Happy Birthday
 void happy_birthday() {
 #if _TESTDATA_
-  // set ./testdata/xxx.in -> stdin
-  freopen("./testdata/birthday.in", "r", stdin);
+  // set ./testdata/.../xxx.in -> stdin
+  freopen("./testdata/concurrent/birthday.in", "r", stdin);
 #endif
   // N blessings
   usize n;

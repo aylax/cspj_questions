@@ -29,8 +29,8 @@ using value = long long;
 // 题解: 就近匹配思路
 void expr_calc() {
 #if _TESTDATA_
-  // set testdata/xxx.in -> stdin
-  freopen("./testdata/expr_calc.in", "r", stdin);
+  // set ./testdata/.../xxx.in -> stdin
+  freopen("./testdata/structure/expr_calc.in", "r", stdin);
 #endif
 
   string expr;

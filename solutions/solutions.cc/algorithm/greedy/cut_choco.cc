@@ -10,25 +10,25 @@
 
 // --------------------------------------------------------
 // 预声明
-struct Splitor;
+struct splitor;
 
 // --------------------------------------------------------
 // 设定类型别名
 using usize = int;
-using Value = int;
-using array = std::vector<Splitor>;
+using value = int;
+using array = std::vector<splitor>;
 
 // --------------------------------------------------------
 // 定义枚举: 切割方式
-enum SplitWay {
+enum splitway {
   horizontal,  // 水平切割
   vertical,    // 垂直切割
 };
 
 // 定义对象: 切割
-struct Splitor {
-  SplitWay sway;  // 切割方式
-  Value cost;     // 切割代价
+struct splitor {
+  splitway sway;  // 切割方式
+  value cost;     // 切割代价
 };
 
 // --------------------------------------------------------
@@ -46,21 +46,21 @@ void cut_choco() {
   array arr(h + v - 2);
 
   for (usize i = 0; i < h - 1; i++) {
-    arr[i].sway = SplitWay::horizontal;
+    arr[i].sway = splitway::horizontal;
     std::cin >> arr[i].cost;
   }
 
   for (usize i = h - 1; i < h + v - 2; i++) {
-    arr[i].sway = SplitWay::vertical;
+    arr[i].sway = splitway::vertical;
     std::cin >> arr[i].cost;
   }
 
   // 降序排序
   // Lambda: Compare(a, b)
-  auto cmp = [](Splitor &a, Splitor &b) -> bool { return a.cost > b.cost; };
+  auto cmp = [](splitor &a, splitor &b) -> bool { return a.cost > b.cost; };
   std::sort(arr.begin(), arr.end(), cmp);
 
-  Value total = 0;     // 总计代价
+  value total = 0;     // 总计代价
   usize hcounter = 1;  // 记录已经横切的次数
   usize vcounter = 1;  // 记录已经竖切的次数
 
@@ -68,13 +68,13 @@ void cut_choco() {
     usize counter;
 
     // 如果水平划分, 代价为 hcost * vcounter
-    if (SplitWay::horizontal == arr[i].sway) {
+    if (splitway::horizontal == arr[i].sway) {
       counter = vcounter;
       hcounter += 1;
     }
 
     // 如果竖直划分, 代价为 vcost * hcounter
-    if (SplitWay::vertical == arr[i].sway) {
+    if (splitway::vertical == arr[i].sway) {
       counter = hcounter;
       vcounter += 1;
     }

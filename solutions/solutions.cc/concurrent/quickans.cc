@@ -47,8 +47,8 @@ struct Player {
 // Tip: 一次只能有一个玩家抢到回答的机会
 void quickans() {
 #if _TESTDATA_
-  // set testdata/xxx.in -> stdin
-  freopen("./testdata/quickans.in", "r", stdin);
+  // set ./testdata/.../xxx.in -> stdin
+  freopen("./testdata/concurrent/quickans.in", "r", stdin);
 #endif
 
   // N players

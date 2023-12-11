@@ -12,9 +12,9 @@
 
 // --------------------------------------------------------
 // 设定类型别名
-using Value = int;
+using value = int;
 using usize = int;
-using array = std::vector<Value>;
+using array = std::vector<value>;
 
 // --------------------------------------------------------
 // 定义对象
@@ -35,10 +35,10 @@ void warehouse_addr() {
 
   // 升序排序
   // Lambda: Compare(a, b)
-  auto cmp = [](Value &a, Value &b) -> bool { return a < b; };
+  auto cmp = [](value &a, value &b) -> bool { return a < b; };
   std::sort(arr.begin(), arr.end(), cmp);
 
-  Value median = arr[n / 2];  // 中位数
+  value median = arr[n / 2];  // 中位数
 
   long ans = 0;  // 最短距离求和
 

@@ -14,8 +14,8 @@
 // --------------------------------------------------------
 // 设定类型别名
 using usize = int;
-using Value = int;
-using array = std::vector<Value>;
+using value = int;
+using array = std::vector<value>;
 
 // --------------------------------------------------------
 // 定义对象
@@ -26,7 +26,7 @@ using array = std::vector<Value>;
 // 优先选择高度比较高的奶牛
 void bookshelf() {
   usize n;  // n头奶牛
-  Value h;  // h总高度
+  value h;  // h总高度
   std::cin >> n >> h;
   array arr(n);
 
@@ -36,7 +36,7 @@ void bookshelf() {
 
   // 根据高度, 降序排序
   // Lambda: Compare(a, b)
-  auto cmp = [](Value &a, Value &b) -> bool { return a > b; };
+  auto cmp = [](value &a, value &b) -> bool { return a > b; };
   std::sort(arr.begin(), arr.end(), cmp);
 
   usize index = 0;  // arr[index] 第index头奶牛

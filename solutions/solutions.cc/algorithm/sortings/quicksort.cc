@@ -15,17 +15,17 @@ struct Item;
 // --------------------------------------------------------
 // 设定类型别名
 using usize = int;
-using Value = int;
+using value = int;
 using array = std::vector<Item>;
 
 // --------------------------------------------------------
 // 定义Item对象
 struct Item {
-  Value value;
+  value val;
 
   bool operator>(const Item &other) const {
     const auto &self = (*this);
-    return self.value > other.value;
+    return self.val > other.val;
   }
 };
 
@@ -101,13 +101,13 @@ void test_quicksort() {
 
   array arr(n);
   for (usize i = 0; i < n; i++) {
-    std::cin >> arr[i].value;
+    std::cin >> arr[i].val;
   }
 
   quicksort(arr);
 
   for (usize i = 0; i < n; i++) {
-    std::cout << arr[i].value << " ";
+    std::cout << arr[i].val << " ";
   }
   std::cout << "\n";
 }

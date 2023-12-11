@@ -10,8 +10,8 @@
 // --------------------------------------------------------
 // 设定类型别名
 using usize = int;
-using Value = int;
-using array = std::vector<Value>;
+using value = int;
+using array = std::vector<value>;
 
 // --------------------------------------------------------
 // Fn: 均分纸牌问题
@@ -26,12 +26,12 @@ void share_poker() {
   array arr(n);
 
   // 记录每一堆的纸牌张数
-  Value sum = 0;  // 纸牌总数
+  value sum = 0;  // 纸牌总数
   for (usize i = 0; i < n; i++) {
     std::cin >> arr[i];
     sum += arr[i];
   }
-  Value avg = sum / n;  // 均分后每堆纸牌的张数 (Sum 是 N的 整数倍)
+  value avg = sum / n;  // 均分后每堆纸牌的张数 (Sum 是 N的 整数倍)
 
   usize cnt = 0;
   for (usize i = 0; i < n - 1; i++) {

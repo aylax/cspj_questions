@@ -12,9 +12,9 @@
 
 // --------------------------------------------------------
 // 设定类型别名
-using Value = int;
+using value = int;
 using usize = int;
-using array = std::vector<Value>;
+using array = std::vector<value>;
 
 // --------------------------------------------------------
 // 定义对象
@@ -22,16 +22,16 @@ using array = std::vector<Value>;
 // --------------------------------------------------------
 // Fn: Binary Search 二分查找, 数组升序排列
 // Tip: 从索引1开始
-usize binary_search(array &arr, Value &value) {
+usize binary_search(array &arr, value &val) {
   // Lambda: Binary Fn 二分查找迭代实现
-  auto binfn = [](array &arr, Value &value, usize begin, usize end) {
+  auto binfn = [](array &arr, value &val, usize begin, usize end) {
     usize bin, low = begin, high = end;
 
     while (low <= high) {
       bin = (low + high) >> 1;  // 更新二分查找点
-      if (value == arr[bin]) {
+      if (val == arr[bin]) {
         return bin;
-      } else if (value < arr[bin]) {
+      } else if (val < arr[bin]) {
         high = bin - 1;
       } else {
         low = bin + 1;
@@ -42,7 +42,7 @@ usize binary_search(array &arr, Value &value) {
   };
 
   // Start Binary Search
-  return binfn(arr, value, 1, arr.size() - 1);
+  return binfn(arr, val, 1, arr.size() - 1);
 };
 
 // --------------------------------------------------------
@@ -58,11 +58,11 @@ void num_sum() {
     std::cin >> arr[i];
   }
 
-  Value k, s;
+  value k, s;
 
   std::cin >> k >> s;
 
-  Value x = s - k;
+  value x = s - k;
 
   // 二分查找元素
   usize index = binary_search(arr, x);

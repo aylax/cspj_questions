@@ -13,12 +13,12 @@
 // --------------------------------------------------------
 // 设定类型别名
 using usize = int;
-using Value = int;
-using array = std::vector<Value>;
+using value = int;
+using array = std::vector<value>;
 
 // --------------------------------------------------------
 // Fn: Max 获取最小值
-Value max(Value a, Value b) { return a > b ? a : b; }
+value max(value a, value b) { return a > b ? a : b; }
 
 // --------------------------------------------------------
 // Fn: 伐木工人问题
@@ -29,17 +29,17 @@ void woodcut() {
   array arr(n);
 
   // 录入木材高度, 并记录最高的树木高度
-  Value low = 0, high = 0, bin;
+  value low = 0, high = 0, bin;
   for (usize i = 0; i < n; i++) {
     std::cin >> arr[i];
     high = max(high, arr[i]);
   }
 
   // Lambda: 判段是否达标
-  auto gt_or_eq = [&n, &required, &arr](Value value) {
-    Value sum = 0;
+  auto gt_or_eq = [&n, &required, &arr](value val) {
+    value sum = 0;
     for (usize i = 0; i < n; i++) {
-      if (arr[i] > value) sum += (arr[i] - value);
+      if (arr[i] > val) sum += (arr[i] - val);
       if (sum >= required) return true;
     }
     return false;

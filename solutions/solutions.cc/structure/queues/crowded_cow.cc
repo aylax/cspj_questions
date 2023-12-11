@@ -40,8 +40,8 @@ struct cow {
 // 两次都包含某个索引值, 则输出该索引
 void crowded_cow() {
 #if _TESTDATA_
-  // set testdata/xxx.in -> stdin
-  freopen("./testdata/crowded_cow.in", "r", stdin);
+  // set ./testdata/.../xxx.in -> stdin
+  freopen("./testdata/structure/crowded_cow.in", "r", stdin);
 #endif
 
   usize n, k;  // 元素个数 n, 距离 k
