@@ -79,11 +79,11 @@ void mono_queue() {
   auto pop_all_large = [](value a, value b) { return a > b; };
 
   // 从左往右循环移动窗口, 并记录符合条件的值
-  for (usize index = 0; index < n; index++) {
-    movewin(maxwin, index, pop_all_small);
-    movewin(minwin, index, pop_all_large);
+  for (usize i = 0; i < n; i++) {
+    movewin(maxwin, i, pop_all_small);
+    movewin(minwin, i, pop_all_large);
 
-    if (index >= k - 1) {  // 每偏移一次, 就记录窗口最值
+    if (i >= k - 1) {  // 每偏移一次, 就记录窗口最值
       value maxval = arr[maxwin.front()];
       value minval = arr[minwin.front()];
       ans.push_back(answer{maxval, minval});

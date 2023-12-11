@@ -38,8 +38,8 @@ void max_subseq() {
   std::cin >> n >> k;
   array arr(n);
 
-  for (usize index = 0; index < n; index++) {
-    std::cin >> arr[index];
+  for (usize i = 0; i < n; i++) {
+    std::cin >> arr[i];
   }
 
   // close stdin
@@ -73,10 +73,10 @@ void max_subseq() {
   auto pop_all_small = [](value a, value b) { return a < b; };
 
   // 从左往右循环移动窗口, 并记录符合条件的值
-  for (usize index = 0; index < n; index++) {
-    movewin(win, index, pop_all_small);
+  for (usize i = 0; i < n; i++) {
+    movewin(win, i, pop_all_small);
 
-    if (index >= k - 1) {  // 每偏移一次, 就记录窗口最值
+    if (i >= k - 1) {  // 每偏移一次, 就记录窗口最值
       ans.push_back(arr[win.front()]);
     }
   }

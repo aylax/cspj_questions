@@ -48,8 +48,8 @@ void crowded_cow() {
   std::cin >> n >> k;
   array arr(n);
 
-  for (usize index = 0; index < n; index++) {
-    std::cin >> arr[index].x >> arr[index].h;
+  for (usize i = 0; i < n; i++) {
+    std::cin >> arr[i].x >> arr[i].h;
   }
 
   // close stdin
@@ -93,16 +93,16 @@ void crowded_cow() {
   };
 
   // 从左往右循环移动窗口, 并记录符合条件的值
-  for (usize index = 0; index < n; index++) {
-    findcow(win, index);
+  for (usize i = 0; i < n; i++) {
+    findcow(win, i);
   }
 
   // 清空窗口
   win.clear();
 
   // 从右往左循环移动窗口, 并记录符合条件的值
-  for (usize index = n - 1; index > 0; index--) {
-    findcow(win, index);
+  for (usize i = n - 1; i > 0; i--) {
+    findcow(win, i);
   }
 
   // 计算符合条件的数量
