@@ -43,7 +43,7 @@ void expr_calc() {
 
   std::stack<value> ns;
   const char terminator = '@';  // 终止符
-  const char splitor = ' ';     // 分隔符
+  const char splitor = '.';     // 分隔符
 
   // Lambda: 算术运算
   auto add = [](value a, value b) { return a + b; };
