@@ -54,8 +54,8 @@ usize binary_search(array &arr, value &val) {
 // 题解: 二分查找
 void find_kn() {
 #if _TESTDATA_
-  // set ./testdata/.../xxx.in -> stdin
-  freopen("./testdata/algorithm/find_kn.in", "r", stdin);
+  // set "../testdata/.../xxx.in -> stdin
+  freopen("../testdata/algorithm/find_kn.in", "r", stdin);
 #endif
 
   usize n, k;

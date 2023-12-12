@@ -64,8 +64,8 @@ struct Transaction {
 // Fn:账户交易
 void transaction() {
 #if _TESTDATA_
-  // set ./testdata/.../xxx.in -> stdin
-  freopen("./testdata/concurrent/transaction.in", "r", stdin);
+  // set "../testdata/.../xxx.in -> stdin
+  freopen("../testdata/concurrent/transaction.in", "r", stdin);
 #endif
 
   usize n;  // n 个账户

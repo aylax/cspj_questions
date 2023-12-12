@@ -54,8 +54,8 @@ usize binary_search(array &arr, value &val) {
 // 题解: 二分查找
 void num_sum() {
 #if _TESTDATA_
-  // set ./testdata/.../xxx.in -> stdin
-  freopen("./testdata/algorithm/num_sum.in", "r", stdin);
+  // set "../testdata/.../xxx.in -> stdin
+  freopen("../testdata/algorithm/num_sum.in", "r", stdin);
 #endif
 
   usize n;

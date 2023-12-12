@@ -11,7 +11,7 @@
 // 预声明
 // stdin redirect testdata/
 #ifndef _TESTDATA_
-#define _TESTDATA_ 0  // 1: Open, 0: Close
+#define _TESTDATA_ 1  // 1: Open, 0: Close
 #endif
 
 // --------------------------------------------------------
@@ -29,8 +29,8 @@ value max(value a, value b) { return a > b ? a : b; }
 // 题解: 二分查找
 void woodcut() {
 #if _TESTDATA_
-  // set ./testdata/.../xxx.in -> stdin
-  freopen("./testdata/algorithm/woodcut.in", "r", stdin);
+  // set "../testdata/.../xxx.in -> stdin
+  freopen("../testdata/algorithm/woodcut.in", "r", stdin);
 #endif
 
   usize n, required;  // 树木数量, 需求木材长度

@@ -45,8 +45,8 @@ using array = std::vector<value>;
 // clang-format on
 void station_ticket() {
 #if _TESTDATA_
-  // set ./testdata/.../xxx.in -> stdin
-  freopen("./testdata/algorithm/station_ticket.in", "r", stdin);
+  // set "../testdata/.../xxx.in -> stdin
+  freopen("../testdata/algorithm/station_ticket.in", "r", stdin);
 #endif
 
   usize n, m;  // n个窗口, m个用户

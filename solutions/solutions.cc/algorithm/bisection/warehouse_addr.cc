@@ -29,8 +29,8 @@ using array = std::vector<value>;
 // 货仓应该在排好序的列表的中间位置
 void warehouse_addr() {
 #if _TESTDATA_
-  // set ./testdata/.../xxx.in -> stdin
-  freopen("./testdata/algorithm/warehouse_addr.in", "r", stdin);
+  // set "../testdata/.../xxx.in -> stdin
+  freopen("../testdata/algorithm/warehouse_addr.in", "r", stdin);
 #endif
 
   usize n;
