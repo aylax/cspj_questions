@@ -57,8 +57,8 @@ void max_area_rect() {
       ms.pop();
       value h = arr[m];  // 矩形高度
       // 索引L与索引M中间可能存在已弹出的区域(都比H<M>高)
-      value l = ms.empty() ? 0 : ms.top() + 1;
-      value w = r - l;  // 区域范围
+      usize l = ms.empty() ? 0 : ms.top() + 1;
+      usize w = r - l;  // 区域范围
       ret = std::max(ret, w * h);
     }
     return ret;
