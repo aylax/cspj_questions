@@ -47,7 +47,7 @@ void max_area_rect() {
   fclose(stdin);
 #endif
 
-  stack ms;  // 单调递减栈
+  stack ms;  // 单调栈
 
   // Lambda: 求弹出区域的最大矩形面积
   auto max_included = [&ms, &arr](usize r, value k) -> value {
