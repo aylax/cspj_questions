@@ -10,18 +10,19 @@
 
 // --------------------------------------------------------
 // 预声明
-struct Farmer;
+struct farmer;
 
 // --------------------------------------------------------
 // 设定类型别名
 using usize = int;
-using array = std::vector<Farmer>;
+using value = int;
+using array = std::vector<farmer>;
 
 // --------------------------------------------------------
 // Struct: 定义奶农对象
-struct Farmer {
-  int unit_price;  // 牛奶单价
-  int production;  // 牛奶产量
+struct farmer {
+  value unit_price;  // 牛奶单价
+  value production;  // 牛奶产量
 };
 
 // --------------------------------------------------------
@@ -29,8 +30,8 @@ struct Farmer {
 // 题解: 贪心算法思想
 // 优先从价格便宜的奶农处收购牛奶
 void mixed_milk() {
-  int required;  // 需求奶量
-  usize n;       // 奶农人数
+  value required;  // 需求奶量
+  usize n;         // 奶农人数
   std::cin >> required >> n;
   array arr(n);
 
@@ -41,16 +42,16 @@ void mixed_milk() {
 
   // 根据牛奶单价, 升序排序
   // Lambda: Compare(a, b)
-  auto cmp = [](Farmer &a, Farmer &b) -> bool {
+  auto cmp = [](farmer &a, farmer &b) -> bool {
     return a.unit_price < b.unit_price;
   };
   std::sort(arr.begin(), arr.end(), cmp);
 
-  usize index = 0;  // 从arr[index]奶农处购买牛奶
-  int payment = 0;  // 支付金额
+  usize index = 0;    // 从arr[index]奶农处购买牛奶
+  value payment = 0;  // 支付金额
   while (required > 0 && index < n) {
     // 按需收购牛奶
-    int buying = std::min(required, arr[index].production);
+    value buying = std::min(required, arr[index].production);
     payment += buying * arr[index].unit_price;
 
     required -= buying;

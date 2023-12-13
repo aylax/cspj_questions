@@ -10,20 +10,22 @@
 
 // --------------------------------------------------------
 // 预声明
-struct Job;
+struct job;
 
 // --------------------------------------------------------
 // 设定类型别名
 using usize = int;
-using array = std::vector<Job>;
+using value = int;
+using array = std::vector<job>;
 
 // --------------------------------------------------------
 // 定义任务对象
-struct Job {
-  int take_time;        // 任务花费时间
-  int latest_end_time;  // 任务最迟结束时间
+struct job {
+  value take;      // 任务耗时
+  value deadline;  // 任务最迟结束时间
 
-  int latest_begin_time() { return latest_end_time - take_time; }
+  // 任务最迟开始时间
+  value begin() { return deadline - take; }
 };
 
 // --------------------------------------------------------
@@ -33,7 +35,7 @@ struct Job {
 // 其次: 当前任务的<最迟结束时间>应该在下一个任务的<最迟开始时间>之前完成
 // 所以:
 // 更新当前任务: <最迟结束时间> = min(next.start, self.end)
-// 计算当前任务: <最迟开始时间> = <最迟结束时间> - <任务花费时间>
+// 计算当前任务: <最迟开始时间> = <最迟结束时间> - <任务耗时>
 // 判断当前任务: <最迟开始时间> 小于 0 表示时间不够完成任务, 返回 -1
 // 否则继续判断上一个任务
 void manage_time() {
@@ -42,31 +44,29 @@ void manage_time() {
   array arr(n);
 
   for (usize i = 0; i < n; i++) {
-    std::cin >> arr[i].take_time;
-    std::cin >> arr[i].latest_end_time;
+    std::cin >> arr[i].take;
+    std::cin >> arr[i].deadline;
   }
 
   // 根据任务最迟结束时间, 降序排序
   // Lambda: Compare(a, b)
-  auto cmp = [](Job &a, Job &b) -> bool {
-    return a.latest_end_time > b.latest_end_time;
-  };
+  auto cmp = [](job &a, job &b) -> bool { return a.deadline > b.deadline; };
   std::sort(arr.begin(), arr.end(), cmp);
 
   // <剩余时间>就是完成的任务的<最迟开始时间>
-  int extra_time = arr[0].latest_begin_time();
+  value free = arr[0].begin();
   for (usize i = 1; i < n; i++) {
     // <当前任务>必须在<下一个任务>的<最迟开始时间>前结束
-    int selfjob_end_time = arr[i].latest_end_time;
-    int nextjob_begin_time = arr[i - 1].latest_begin_time();
-    arr[i].latest_end_time = std::min(nextjob_begin_time, selfjob_end_time);
+    value self_deadline = arr[i].deadline;
+    value next_begin = arr[i - 1].begin();
+    arr[i].deadline = std::min(next_begin, self_deadline);
 
     // 更新剩余时间
-    extra_time = arr[i].latest_begin_time();
+    free = arr[i].begin();
     // 如果剩余时间小于零, 直接结束检查
-    if (extra_time < 0) break;
+    if (free < 0) break;
   }
-  std::cout << ((extra_time < 0) ? -1 : extra_time) << "\n";
+  std::cout << ((free < 0) ? -1 : free) << "\n";
 }
 
 // --------------------------------------------------------

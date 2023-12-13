@@ -20,9 +20,9 @@
 // Fn: 三连击<例生成数字>问题
 // 题解: 枚举思想
 void genratio() {
-  int has_result = false;  // 本题是否有解
-  int ra, rb, rc;          // ra < rb < rc
-  int na, nb, nc;          // 比例系数下 a, b, c的值
+  bool has_result = false;  // 本题是否有解
+  int ra, rb, rc;           // ra < rb < rc
+  int na, nb, nc;           // 比例系数下 a, b, c的值
 
   int bucket[10] = {0};  // 创建存储桶, 存入1~9的出现次数
   std::cin >> ra >> rb >> rc;

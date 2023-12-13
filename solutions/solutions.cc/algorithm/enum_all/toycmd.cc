@@ -10,24 +10,24 @@
 
 // --------------------------------------------------------
 // 预声明
-struct Toy;
-struct Cmd;
+struct toy;
+struct cmd;
 
 // --------------------------------------------------------
 // 设定类型别名
 using std::string;
-using usize = size_t;
+using usize = long;
 
 // --------------------------------------------------------
 // 定义玩具对象
-struct Toy {
+struct toy {
   usize index;      // 位置索引
   bool is_outside;  // 是否朝外
   string toyname;   // 名称
 };
 
 // 定义指令对象
-struct Cmd {     // 指令
+struct cmd {     // 指令
   bool turn_rt;  // 是否朝右
   usize offset;  // 偏移位数
 };
@@ -38,8 +38,8 @@ struct Cmd {     // 指令
 void toycmd() {
   usize toynum, cmdnum;  // 玩具数量, 指令数量
   std::cin >> toynum >> cmdnum;
-  std::vector<Toy> ntoy(toynum);
-  std::vector<Cmd> ncmd(cmdnum);
+  std::vector<toy> ntoy(toynum);
+  std::vector<cmd> ncmd(cmdnum);
 
   // 录入toynum个玩具
   for (usize i = 0; i < toynum; i++) {
@@ -54,9 +54,9 @@ void toycmd() {
     std::cin >> ncmd[i].offset;
   }
 
-  Cmd curcmd = {};       // 当前执行的指令
+  cmd curcmd = {};       // 当前执行的指令
   usize toynext = 0;     // 指向下一个的玩具的索引
-  Toy curtoy = ntoy[0];  // 当前执行指令的小人
+  toy curtoy = ntoy[0];  // 当前执行指令的小人
 
   // 循环处理 cmdnum 条指令
   for (usize i = 0; i < cmdnum; i++) {

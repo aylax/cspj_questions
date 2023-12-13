@@ -51,20 +51,23 @@ void max_subseq() {
   deque win;  // 窗口队列, 降序排列
 
   // Lambda: 移动窗口, 并调整最值
-  auto movewin = [&k, &arr](deque &win, usize index, auto cmp) {
+  auto movewin = [&k, &arr](deque &win, usize i, auto cmp) {
     // Lambda: 超出搜寻范围
-    auto outof_range = [&k](usize diff) { return !(std::abs(diff) < k); };
+    auto is_outside = [&k](usize a, usize b) {
+      if (a < b) std::swap(a, b);
+      return !(a - b < k);
+    };
 
-    // 弹出窗口中所有不符合 cmp(win[back],arr[index]) 的元素
-    while (!win.empty() && cmp(arr[win.back()], arr[index])) {
+    // 弹出窗口中所有不符合 cmp(win[back],arr[i]) 的元素
+    while (!win.empty() && cmp(arr[win.back()], arr[i])) {
       win.pop_back();
     }
 
-    // arr[index] 元素的索引 index 放入窗口
-    win.push_back(index);
+    // arr[i] 元素的索引 i 放入窗口
+    win.push_back(i);
 
     // 保持窗口宽度: Len = K
-    while (!win.empty() && outof_range(index - win.front())) {
+    while (!win.empty() && is_outside(i, win.front())) {
       win.pop_front();
     }
   };

@@ -19,7 +19,7 @@ namespace opsr = std::ranges;
 #endif
 
 // Alias TypeName
-using usize = size_t;
+using usize = long;
 using std::string;
 using slice = std::string_view;
 

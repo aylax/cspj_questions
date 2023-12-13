@@ -14,6 +14,7 @@
 // --------------------------------------------------------
 // 设定类型别名
 using std::string;
+using value = int;
 
 // --------------------------------------------------------
 // 定义对象
@@ -23,11 +24,11 @@ using std::string;
 // 题解: 枚举思想
 void pingpang() {
   char alpha;
-  int A11 = 0, A21 = 0, B11 = 0, B21 = 0;
+  value A11 = 0, A21 = 0, B11 = 0, B21 = 0;
   std::vector<string> R11, R21;  // 11分制比赛记录, 21分制比赛记录
 
   // Lambda: 判断 base 分制下比赛是否结束
-  auto end_of_match = [](int base, auto a, auto b) {
+  auto end_of_match = [](auto base, auto a, auto b) {
     return (a >= base || b >= base) && abs(a - b) >= 2;
   };
 

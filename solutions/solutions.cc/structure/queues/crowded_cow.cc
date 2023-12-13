@@ -58,37 +58,37 @@ void crowded_cow() {
 #endif
 
   // 升序排列
-  auto cmp = [](cow &a, cow &b) { return a.x < b.x; };
-  std::sort(arr.begin(), arr.end(), cmp);
+  std::sort(arr.begin(), arr.end(), [](cow &a, cow &b) { return a.x < b.x; });
 
   deque win;  // 窗口队列, 降序排列
 
   // 移动窗口, 并调整最值
-  auto movewin = [&k, &arr](deque &win, usize index, auto cmp) {
+  auto movewin = [&k, &arr](deque &win, usize i, auto cmp) {
     // 超出搜寻范围
-    auto outof_range = [&k](cow &a, cow &b) {
-      return !(std::abs(a.x - b.x) <= k);
+    auto is_outside = [&k](usize a, usize b) {
+      if (a < b) std::swap(a, b);
+      return !(a - b <= k);
     };
-    // 弹出窗口中所有不符合 cmp(win[back],arr[index]) 的元素
-    while (!win.empty() && cmp(arr[win.back()], arr[index])) {
+    // 弹出窗口中所有不符合 cmp(win[back],arr[i]) 的元素
+    while (!win.empty() && cmp(arr[win.back()], arr[i])) {
       win.pop_back();
     }
 
-    // arr[index] 元素的索引 index 放入窗口
-    win.push_back(index);
+    // arr[i] 元素的索引 i 放入窗口
+    win.push_back(i);
 
     // 保持窗口宽度: xmax - xmin = K
-    while (!win.empty() && outof_range(arr[win.front()], arr[index])) {
+    while (!win.empty() && is_outside(arr[win.front()].x, arr[i].x)) {
       win.pop_front();
     }
   };
 
   // 寻找符合条件的奶牛
-  auto findcow = [&k, &arr, &movewin](deque &win, usize index) {
+  auto findcow = [&k, &arr, &movewin](deque &win, usize i) {
     auto pop_all_small = [](cow &a, cow &b) { return a.h < b.h; };
-    movewin(win, index, pop_all_small);
-    if (!win.empty() && arr[win.front()].h >= 2 * arr[index].h) {
-      arr[index].hit += 1;  // 符合条件命中, 次数加一
+    movewin(win, i, pop_all_small);
+    if (!win.empty() && arr[win.front()].h >= 2 * arr[i].h) {
+      arr[i].hit += 1;  // 符合条件命中, 次数加一
     }
   };
 
@@ -106,7 +106,7 @@ void crowded_cow() {
   }
 
   // 计算符合条件的数量
-  usize ans = 0;
+  int ans = 0;
   for (usize i = 0; i < n; i++) {
     if (arr[i].hit == 2) {
       ans += 1;

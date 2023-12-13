@@ -19,7 +19,7 @@
 // 设定类型别名
 using usize = int;
 using value = int;
-using stack = std::stack<value>;
+using stack = std::stack<usize>;
 using array = std::vector<value>;
 
 // --------------------------------------------------------
@@ -47,9 +47,8 @@ void mono_stack() {
   fclose(stdin);
 #endif
 
-  array ans(n + 1);  // 答案
-  stack ms;          // 单调栈
-
+  stack ms;                       // 单调栈
+  std::vector<usize> ans(n + 1);  // 答案
   for (usize i = 1; i < n + 1; i++) {
     // 弹出不符合条件的元素
     while (!ms.empty() && arr[ms.top()] < arr[i]) {

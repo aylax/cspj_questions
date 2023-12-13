@@ -12,7 +12,8 @@
 
 // --------------------------------------------------------
 // 设定类型别名
-using array = std::vector<int>;
+using usize = int;
+using array = std::vector<usize>;
 
 // --------------------------------------------------------
 // 定义对象
@@ -21,10 +22,10 @@ using array = std::vector<int>;
 // Fn: 数字密码锁问题
 // 题解: 枚举思想
 void passwordlock() {
-  int n = 0;  // 读取的状态数量
+  usize n = 0;  // 读取的状态数量
   std::cin >> n;
 
-  int locklen = 5;  // 密码锁长度
+  usize locklen = 5;  // 密码锁长度
 
   array lockin(locklen, 0);  // 当前输入的密码锁状态, 数组形式存放
   array lockot(locklen, 0);  // 当前输出的密码锁状态, 数组形式存放
@@ -32,8 +33,8 @@ void passwordlock() {
 
   // Lambda: lockot结果写入inpass
   auto addto_inpass = [&inpass, &locklen](array &lockot) {
-    int passnum = 0;
-    for (int i = 0; i < locklen; i++) {
+    usize passnum = 0;
+    for (usize i = 0; i < locklen; i++) {
       passnum = passnum * 10 + lockot[i];
     }
     inpass.push_back(passnum);
@@ -44,9 +45,9 @@ void passwordlock() {
                             &addto_inpass](array &lockin) {
     inpass.clear();  // 清空inpass的原有生成序列
     // 对密码锁上每一个位置进行拨动
-    for (int i = 0; i < locklen; i++) {
+    for (usize i = 0; i < locklen; i++) {
       // 当前位置一次性拨动多少格
-      for (int offset = 1; offset <= 9; offset++) {
+      for (usize offset = 1; offset <= 9; offset++) {
         // 方式1: 只拨动一个拨圈
         lockot[i] = (lockin[i] + offset) % 10;
         addto_inpass(lockot);  // 写入输出结果
@@ -62,9 +63,9 @@ void passwordlock() {
   };
 
   array allpass(100'000);  // 所有可能的密码序列, 初始化0
-  for (int i = 0; i < n; i++) {
+  for (usize i = 0; i < n; i++) {
     // 读入一行密码状态序列
-    for (int j = 0; j < locklen; j++) {
+    for (usize j = 0; j < locklen; j++) {
       std::cin >> lockin[j];  // 初始化当前密码锁输入状态
       lockot[j] = lockin[j];  // 初始化当前密码锁输出状态
     }
@@ -78,7 +79,7 @@ void passwordlock() {
     }
   }
 
-  int ans = 0;                   // 正确个数
+  usize ans = 0;                 // 正确个数
   for (auto hitnum : allpass) {  // 读取可能全部密码的命中状态次数
     if (hitnum == n) {           // 命中所有密码状态, 即为正确密码
       ans += 1;

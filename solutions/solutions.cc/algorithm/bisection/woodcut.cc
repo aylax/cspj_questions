@@ -33,7 +33,8 @@ void woodcut() {
   freopen("../testdata/algorithm/woodcut.in", "r", stdin);
 #endif
 
-  usize n, required;  // 树木数量, 需求木材长度
+  usize n;         // 树木数量
+  value required;  // 需求木材长度
   std::cin >> n >> required;
   array arr(n);
 

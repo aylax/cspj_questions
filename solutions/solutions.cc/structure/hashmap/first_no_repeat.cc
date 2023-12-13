@@ -50,7 +50,7 @@ void first_no_repeat() {
   array count(256);
 
   // Lambda: 字符转数字
-  auto ord = [](char ch) -> value { return ch; };
+  auto ord = [](char ch) -> usize { return ch; };
 
   // 记录字符串中各个字母出现次数
   for (usize i = 0; i < len; i++) {
