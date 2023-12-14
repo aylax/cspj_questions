@@ -37,12 +37,31 @@ void check_pops_seq() {
   usize n;  // 询问次数
   std::cin >> n;
 
-  // 读取数据
+  // Lambda: 读取数据
   auto readin = [](array &arr, usize len) {
     // 读取入栈序列
     for (usize i = 0; i < len; i++) {
       std::cin >> arr[i];
     }
+  };
+
+  // Lambda: 判断出栈序列是否合法
+  auto resolve = [](array &seqin, array &seqout) -> bool {
+    stack s;  // 模拟入栈和出栈
+    usize len = seqin.size();
+    usize topout = 0;  // 指向出栈序列栈顶
+    auto flag = [&s, &topout, &len]() -> bool {
+      return !s.empty() && topout < len;
+    };
+    for (usize topin = 0; topin < len; topin++) {
+      s.push(seqin[topin]);
+      while (flag() && s.top() == seqout[topout]) {
+        topout += 1;
+        s.pop();
+      }
+    }
+
+    return topout == len;
   };
 
   for (usize i = 0; i < n; i++) {
@@ -57,22 +76,9 @@ void check_pops_seq() {
     array seqout(len);
     readin(seqout, len);
 
-    stack s;           // 模拟入栈和出栈
-    usize topout = 0;  // 指向出栈序列栈顶
-
-    for (usize topin = 0; topin < len; topin++) {
-      s.push(seqin[topin]);
-      auto mustdo = [&s, &topout, &len]() -> bool {
-        return !s.empty() && topout < len;
-      };
-      while (mustdo() && s.top() == seqout[topout]) {
-        topout += 1;
-        s.pop();
-      }
-    }
-
-    auto ans = (topout == len) ? "Yes" : "No";
-    std::cout << ans << "\n";
+    // 解析出栈序列是否合法
+    auto ans = resolve(seqin, seqout);
+    std::cout << (ans ? "Yes" : "No") << "\n";
   }
 
   // close stdin
