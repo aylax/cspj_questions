@@ -60,7 +60,8 @@ void bracket_match() {
     dict[key] = i;
   }
 
-  auto domatch = [&base, &half, &dict](string &s) {
+  // 括号匹配判断
+  auto domatch = [&base, &half, &dict](string &s) -> bool {
     stack bs;
     for (usize i = 0; i < s.size(); i++) {
       value key = s[i];  // 读取字符

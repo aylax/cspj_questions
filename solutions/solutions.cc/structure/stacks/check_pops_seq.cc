@@ -50,6 +50,8 @@ void check_pops_seq() {
     stack s;  // 模拟入栈和出栈
     usize len = seqin.size();
     usize topout = 0;  // 指向出栈序列栈顶
+
+    // Lambda: 符合迭代要求
     auto flag = [&s, &topout, &len]() -> bool {
       return !s.empty() && topout < len;
     };

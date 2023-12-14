@@ -58,13 +58,15 @@ void crowded_cow() {
 #endif
 
   // 升序排列
-  std::sort(arr.begin(), arr.end(), [](cow &a, cow &b) { return a.x < b.x; });
+  // Lambda: 比较大小
+  auto less_than = [](cow &a, cow &b) { return a.x < b.x; };
+  std::sort(arr.begin(), arr.end(), less_than);
 
   deque win;  // 窗口队列, 降序排列
 
-  // 移动窗口, 并调整最值
+  // Lambda: 移动窗口, 并调整最值
   auto movewin = [&k, &arr](deque &win, usize i, auto cmp) {
-    // 超出搜寻范围
+    // Lambda: 超出搜寻范围
     auto is_outside = [&k](usize a, usize b) {
       if (a < b) std::swap(a, b);
       return !(a - b <= k);
@@ -83,8 +85,9 @@ void crowded_cow() {
     }
   };
 
-  // 寻找符合条件的奶牛
+  // Lambda: 寻找符合条件的奶牛
   auto findcow = [&k, &arr, &movewin](deque &win, usize i) {
+    // Lambda: 弹出所有更小的元素
     auto pop_all_small = [](cow &a, cow &b) { return a.h < b.h; };
     movewin(win, i, pop_all_small);
     if (!win.empty() && arr[win.front()].h >= 2 * arr[i].h) {
