@@ -67,30 +67,31 @@ void quicksort(array &arr) {
   };
 
   // Lambda: Quick Fn 快速排序递归实现
-  auto quickfn = Y([&cutfn](auto self, array &arr, usize begin, usize end) {
-    if (begin >= end) return;          // 排序结束
-    usize low = begin;                 // 初始化低位索引
-    usize high = end;                  // 初始化高位索引
-    usize cpos = cutfn(begin, end);    // 获取随机切割位置
-    std::swap(arr[begin], arr[cpos]);  // 将切割值放在首位
-    // 升序排序
-    while (low < high) {
-      // high索引: 范围中找到小于等于基准值的元素时, 停止
-      while (low < high && (arr[high] > arr[begin])) high -= 1;
-      // low索引: 范围中找到大于基准值的元素时, 停止
-      while (low < high && !(arr[low] > arr[begin])) low += 1;
-      std::swap(arr[low], arr[high]);
-    }
+  auto quickfn =
+      Y([&cutfn](auto quickfn, array &arr, usize begin, usize end) -> void {
+        if (begin >= end) return;          // 排序结束
+        usize low = begin;                 // 初始化低位索引
+        usize high = end;                  // 初始化高位索引
+        usize cpos = cutfn(begin, end);    // 获取随机切割位置
+        std::swap(arr[begin], arr[cpos]);  // 将切割值放在首位
+        // 升序排序
+        while (low < high) {
+          // high索引: 范围中找到小于等于基准值的元素时, 停止
+          while (low < high && (arr[high] > arr[begin])) high -= 1;
+          // low索引: 范围中找到大于基准值的元素时, 停止
+          while (low < high && !(arr[low] > arr[begin])) low += 1;
+          std::swap(arr[low], arr[high]);
+        }
 
-    // 防止low为无符号整数时, low -1导致的数组越界问题
-    low = (low > 0) ? low : 0;
+        // 防止low为无符号整数时, low -1导致的数组越界问题
+        low = (low > 0) ? low : 0;
 
-    // 切割值放到正确位置 [...low-1, cutv, low+1...]
-    std::swap(arr[begin], arr[low]);
-    // 递归排序切割位置左右两侧数据
-    self(arr, begin, low - 1);
-    self(arr, low + 1, end);
-  });
+        // 切割值放到正确位置 [...low-1, cutv, low+1...]
+        std::swap(arr[begin], arr[low]);
+        // 递归排序切割位置左右两侧数据
+        quickfn(arr, begin, low - 1);
+        quickfn(arr, low + 1, end);
+      });
   // Start Quick Sort
   quickfn(arr, 0, arr.size() - 1);
 };
