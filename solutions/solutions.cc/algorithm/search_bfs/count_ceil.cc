@@ -5,6 +5,7 @@
 // Author: zbye
 // --------------------------------------------------------
 #include <iostream>
+#include <queue>
 #include <vector>
 // --------------------------------------------------------
 // 预声明
@@ -24,37 +25,10 @@ struct pos {
 };
 
 // --------------------------------------------------------
-// Template: Y Combinator Y运算子
-// 用于实现: 在<C++>中递归调用匿名函数
-// Example:
-//
-// auto fib = Y([](auto self, int n) {
-//   if (n < 2) return 1;
-//   return self(n - 1) + self(n - 2);
-// });
-//
-// fib(5)
-//
-template <typename Lambda>
-struct YCombinator {
-  Lambda fn;
-
-  template <typename... Args>
-  decltype(auto) operator()(Args &&...args) {  // Passing *this
-    return fn(*this, std::forward<Args>(args)...);
-  }
-};
-
-template <typename Lambda>
-decltype(auto) Y(Lambda fn) {  // Wrapper Lambda
-  return YCombinator<Lambda>{fn};
-}
-
-// --------------------------------------------------------
 // Fn: 统计细胞问题
-// 题解: dfs深度优先搜索
+// 题解: bfs广度优先搜索
+// 用队列记录四周的访问情况,
 // 遇到细胞就增加 ans
-// 并将地图上该细胞四周的细胞消除
 void count_ceil() {
 #if _TESTDATA_
   // set "../testdata/.../xxx.in -> stdin
@@ -64,8 +38,11 @@ void count_ceil() {
   int n, m;  //  n 行, m 列
   std::cin >> n >> m;
 
+  // 存放地图点位信息
   std::vector<std::vector<char>> cmap(n, std::vector<char>(m));
 
+  // 存放地图各个点位的访问情况: true 已访问; false 未访问
+  std::vector<std::vector<bool>> vmap(n, std::vector<bool>(m));
   // 读入地图数据
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < m; j++) {
@@ -99,34 +76,41 @@ void count_ceil() {
     return cmap[cur.y][cur.x] != '0';
   };
 
-  // Lambda: 消除细胞
-  auto remove_ceil = [&cmap](pos cur) -> void {
-    cmap[cur.y][cur.x] = '0';  // 消除细胞
-  };
+  // Lambda: 判断当前节点是否已经访问
+  auto has_visited = [&vmap](pos cur) -> bool { return vmap[cur.y][cur.x]; };
 
-  // Lambda: dfs
-  auto dfs = Y([&](auto dfs, pos cur) -> void {
-    remove_ceil(cur);  // 消除当前访问的细胞
+  // Lambda: 标记当前节点已经访问
+  auto mark_visit = [&vmap](pos cur) -> void { vmap[cur.y][cur.x] = true; };
 
-    // 访问细胞周围四个方位
-    for (auto d : d4) {
-      pos next;
-      next.x = cur.x + d.x;
-      next.y = cur.y + d.y;
-      if (on_the_map(next)) {
-        if (ceil_present(next)) {
-          dfs(next);
+  // Lambda: bfs
+  auto bfs = [&](pos cur) -> void {
+    std::queue<pos> q;
+    q.push(cur);
+    mark_visit(cur);
+    while (!q.empty()) {
+      cur = q.front();
+      // 访问细胞周围四个方位
+      for (auto d : d4) {
+        pos next;
+        next.x = cur.x + d.x;
+        next.y = cur.y + d.y;
+        if (on_the_map(next)) {
+          if (ceil_present(next) && !has_visited(next)) {
+            q.push(next);
+            mark_visit(next);
+          }
         }
       }
+      q.pop();
     }
-  });
+  };
 
   //  从左上角开始搜索
   for (int i = 0; i < n; i++) {
     for (int j = 0; j < m; j++) {
       pos cur = {x : j, y : i};
-      if (ceil_present(cur)) {
-        dfs(cur);
+      if (ceil_present(cur) && !has_visited(cur)) {
+        bfs(cur);
         ans += 1;
       }
     }
