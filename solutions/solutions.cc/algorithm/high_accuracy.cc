@@ -11,13 +11,6 @@
 #include <string_view>
 #include <vector>
 
-#if __cplusplus >= 202100L
-#include <ranges>
-// Alias NameSpace
-namespace opsv = std::views;
-namespace opsr = std::ranges;
-#endif
-
 // Alias TypeName
 using usize = long;
 using std::string;
@@ -35,71 +28,6 @@ using slice = std::string_view;
 //        int *an = new int[10000000]
 const usize MAX_ARR_LENGTH = 1000000;  // 内存栈上最大数组长度
 
-// 高精度分片, 有效利用每一个存储位的存储空间
-const int nbits = 8;            // 压缩位数
-const int nbase = 100'000'000;  // 压缩基数
-
-struct bignum {
- public:
-  static bignum from(slice sn) {
-    auto num = bignum();
-    auto ch_eq_0__fn = [](auto ch) { return ch == '0'; };
-    auto bitsum__fn = [](auto chunk) {
-      int bitsum = 0;
-      for (auto n : chunk) {
-        bitsum = bitsum * 10 + (n - '0');
-      };
-      return bitsum;
-    };
-
-    // clang-format off
-    for (auto bitsum :
-         sn | opsv::drop_while(ch_eq_0__fn)
-            | opsv::chunk(nbits)
-            | opsv::transform(bitsum__fn)
-            | opsv::reverse) {
-      // clang-format on
-      num._data.push_back(bitsum);
-    }
-
-    num._size = num._data.size();
-    return num;
-  }
-
-  bignum() {
-    _data.push_back(0);
-    _size = _data.size();
-  }
-  usize size() { return _size; }
-
-  bool operator==(const bignum &other) const {
-    bignum self = (*this);
-    return true;
-  }
-  bool operator<(const bignum &other) const {
-    bignum self = (*this);
-    return true;
-  }
-
-  bool operator>(const bignum &other) const {
-    bignum self = (*this);
-    return true;
-  }
-
-  bignum operator+(const bignum &other) const {
-    bignum self = (*this), output;
-
-    return output;
-  }
-  bignum operator-(const bignum &other) const {
-    bignum self = (*this), output;
-    return output;
-  }
-
- private:
-  usize _size;
-  std::vector<int> _data;
-};
 // --------------------------------------------------------
 
 // 高精度加法 An + Bn
@@ -246,30 +174,6 @@ int test_high_accuracy() {
 }
 
 int main(int argc, char const *argv[]) {
-  std::cout << "c++ standard version: " << __cplusplus << "\n";
-  // test_high_accuracy();
-  slice sn = "0000032129131231231239293434989127339819234219348624342";
-  slice sn2 = "00000000000000000000000000000000000000000000";
-  std::vector<int> data;
-  auto ch_eq_0__fn = [](auto ch) { return ch == '0'; };
-  auto bitsum__fn = [](auto chunk) {
-    int bitsum = 0;
-    for (auto n : chunk) {
-      bitsum = bitsum * 10 + (n - '0');
-    };
-    return bitsum;
-  };
-
-  // clang-format off
-    for (auto bitsum :
-         sn2 | opsv::drop_while(ch_eq_0__fn)
-            | opsv::chunk(nbits)
-            | opsv::transform(bitsum__fn)
-            | opsv::reverse) {
-    // clang-format on
-    data.push_back(bitsum);
-  }
-  for (auto e : data) {
-    std::cout << e << "\n";
-  }
+  // std::cout << "c++ standard version: " << __cplusplus << "\n";
+  test_high_accuracy();
 }

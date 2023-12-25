@@ -18,18 +18,18 @@
 #define _TESTDATA_ 1  // 1: Open, 0: Close
 #endif
 
-struct Player;
+struct player;
 
 // --------------------------------------------------------
 // 设定类型别名
 using usize = int;
 using std::string;
-using array = std::vector<Player>;
+using array = std::vector<player>;
 using sysclock = std::chrono::system_clock;
 
 // --------------------------------------------------------
 // 定义对象
-struct Player {
+struct player {
   usize no;
   string name;
 
@@ -83,10 +83,10 @@ void quickans() {
   };
 
   // Lambda: 显示抢答成功的玩家信息
-  auto rush = [](Player who) { std::cout << who.stringify(); };
+  auto rush = [](player who) { std::cout << who.stringify(); };
 
   // Lambda: 准备抢答
-  auto ready = [&start, &rush](Player who, std::once_flag *flag) {
+  auto ready = [&start, &rush](player who, std::once_flag *flag) {
     std::this_thread::sleep_until(start);
     std::call_once(*flag, rush, who);
   };

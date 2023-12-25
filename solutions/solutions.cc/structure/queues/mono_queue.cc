@@ -89,7 +89,7 @@ void mono_queue() {
     if (i >= k - 1) {  // 每偏移一次, 就记录窗口最值
       value maxval = arr[maxwin.front()];
       value minval = arr[minwin.front()];
-      ans.push_back(answer{maxval, minval});
+      ans.push_back({maxval, minval});
     }
   }
 
