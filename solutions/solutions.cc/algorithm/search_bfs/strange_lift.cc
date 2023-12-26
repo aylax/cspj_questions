@@ -48,7 +48,7 @@ void strange_lift() {
   // 存放各个点位的访问情况: true 已访问; false 未访问
   std::vector<bool> vmap(n + 1);
 
-  std::vector<char> buttons = {'+', '-'};
+  std::vector<char> methods = {'+', '-'};
 
   // 读入数据
   for (int i = 1; i <= n; i++) {
@@ -73,12 +73,12 @@ void strange_lift() {
   // Lambda: 判断是否到达终点
   auto reach_end = [&b](int pos) -> bool { return pos == b; };
 
-  // Lambda: 触碰按键后返回的楼层数
-  auto after_touch = [&cmap](node cur, char button) -> int {
-    if (button == '+') {
+  // Lambda: 选择指定方式后, 得出的新位置
+  auto apply = [](node cur, char method) -> int {
+    if (method == '+') {
       return cur.pos + cur.offset;
     }
-    if (button == '-') {
+    if (method == '-') {
       return cur.pos - cur.offset;
     }
     return cur.pos;
@@ -100,8 +100,8 @@ void strange_lift() {
         return cur.cnt;
       }
 
-      for (char button : buttons) {
-        int npos = after_touch(cur, button);
+      for (char method : methods) {
+        int npos = apply(cur, method);
         if (reachable(npos)) {
           if (!has_visited(npos)) {
             node next = cmap[npos];

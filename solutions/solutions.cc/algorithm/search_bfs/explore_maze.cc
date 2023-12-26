@@ -61,7 +61,7 @@ void explore_maze() {
   };
 
   // Lambda: 判断坐标点是否在地图上
-  auto on_the_map = [&n, &m](pos cur) -> bool {
+  auto reachable = [&n, &m](pos cur) -> bool {
     return cur.y >= 0 && cur.y < n && cur.x >= 0 && cur.x < m;
   };
 
@@ -102,7 +102,7 @@ void explore_maze() {
         pos next;
         next.x = cur.x + d.x;
         next.y = cur.y + d.y;
-        if (on_the_map(next)) {
+        if (reachable(next)) {
           if (road_present(next) && !has_visited(next)) {
             mark_visit(next);
             q.push(next);

@@ -63,7 +63,7 @@ void save_princess(maze data, pos first, pos last) {
   };
 
   // Lambda: 判断坐标点是否在地图上
-  auto on_the_map = [&n, &m](pos cur) -> bool {
+  auto reachable = [&n, &m](pos cur) -> bool {
     return cur.y >= 0 && cur.y < n && cur.x >= 0 && cur.x < m;
   };
 
@@ -110,8 +110,8 @@ void save_princess(maze data, pos first, pos last) {
         pos next;
         next.x = about.cur.x + d.x;
         next.y = about.cur.y + d.y;
-        if (on_the_map(next)) {
-          if (!has_visited(next) && road_present(next)) {
+        if (reachable(next)) {
+          if (road_present(next) && !has_visited(next)) {
             mark_visit(next);
             int cost = about.cost;
             if (guard_present(next)) {
