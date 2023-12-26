@@ -114,9 +114,9 @@ void explore_maze() {
   };
 
   // 从A点出发是否能到达B点
-  bool reachable = bfs(a);
+  bool ans = bfs(a);
 
-  std::cout << (reachable ? "YES" : "NO") << "\n";
+  std::cout << (ans ? "YES" : "NO") << "\n";
 }
 
 // --------------------------------------------------------
