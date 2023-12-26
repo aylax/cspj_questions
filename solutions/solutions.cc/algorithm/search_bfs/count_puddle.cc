@@ -94,6 +94,8 @@ void count_puddle() {
 
     while (!q.empty()) {
       pos cur = q.front();
+      q.pop();
+
       // 访问周围八个方位
       for (auto d : d8) {
         pos next;
@@ -106,7 +108,6 @@ void count_puddle() {
           }
         }
       }
-      q.pop();
     }
   };
 

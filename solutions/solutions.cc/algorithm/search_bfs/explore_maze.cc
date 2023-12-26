@@ -84,10 +84,13 @@ void explore_maze() {
   // Lambda: bfs
   auto bfs = [&](pos start) -> bool {
     mark_visit(start);
+
     std::queue<pos> q;
     q.push(start);
+
     while (!q.empty()) {
       pos cur = q.front();
+      q.pop();
 
       // 只要有一条路径能到达终点, 就结束搜索
       if (reach_end(cur)) {
@@ -106,7 +109,6 @@ void explore_maze() {
           }
         }
       }
-      q.pop();
     }
     return false;
   };

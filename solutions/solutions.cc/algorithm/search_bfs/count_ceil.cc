@@ -91,6 +91,8 @@ void count_ceil() {
 
     while (!q.empty()) {
       pos cur = q.front();
+      q.pop();
+
       // 访问细胞周围四个方位
       for (auto d : d4) {
         pos next;
@@ -103,7 +105,6 @@ void count_ceil() {
           }
         }
       }
-      q.pop();
     }
   };
 

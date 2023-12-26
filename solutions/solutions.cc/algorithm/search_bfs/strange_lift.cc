@@ -93,6 +93,7 @@ void strange_lift() {
 
     while (!q.empty()) {
       node cur = q.front();
+      q.pop();
 
       // 只要有一条路径先到达终点, 就结束搜索
       if (reach_end(cur.pos)) {
@@ -110,7 +111,6 @@ void strange_lift() {
           }
         }
       }
-      q.pop();
     }
     return -1;
   };

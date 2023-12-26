@@ -91,9 +91,11 @@ void save_princess(maze data, pos first, pos last) {
   // Lambda: bfs
   auto bfs = [&](pos start) -> int {
     mark_visit(start);
+
     // 优先队列, 优先访问代价小的元素
     std::priority_queue<node> q;
     q.push({cur : start, cost : 0});
+
     while (!q.empty()) {
       node about = q.top();
       q.pop();
