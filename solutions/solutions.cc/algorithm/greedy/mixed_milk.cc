@@ -19,7 +19,7 @@ using value = int;
 using array = std::vector<farmer>;
 
 // --------------------------------------------------------
-// Struct: 定义奶农对象
+// 定义奶农对象
 struct farmer {
   value unit_price;  // 牛奶单价
   value production;  // 牛奶产量

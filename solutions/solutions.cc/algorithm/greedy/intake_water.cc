@@ -19,7 +19,7 @@ using value = int;
 using array = std::vector<user>;
 
 // --------------------------------------------------------
-// Struct: 定义取水对象
+// 定义取水对象
 struct user {
   usize no;    // 编号
   value cost;  // 取水花费时间

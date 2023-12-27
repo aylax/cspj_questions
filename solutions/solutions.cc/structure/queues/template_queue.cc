@@ -21,7 +21,7 @@ using value = int;
 using queue = std::queue<value>;
 
 // --------------------------------------------------------
-// 定义对象
+// 定义操作对象
 enum operation {
   push = 1,
   pop,

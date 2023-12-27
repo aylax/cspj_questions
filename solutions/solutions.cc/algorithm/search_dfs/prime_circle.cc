@@ -7,6 +7,7 @@
 #include <cmath>
 #include <iostream>
 #include <vector>
+
 // --------------------------------------------------------
 // 预声明
 // stdin redirect testdata/
@@ -47,6 +48,7 @@ decltype(auto) Y(Lambda fn) {  // Wrapper Lambda
   return YCombinator<Lambda>{fn};
 }
 
+// --------------------------------------------------------
 // Fn: 平方根内求素数
 bool is_prime(int n) {
   if (n % 2 == 0) {  // 偶数直接返回, 少开一次平方根
@@ -80,7 +82,7 @@ void prime_circle() {
   std::vector<int> data(n + 1);
   std::vector<bool> viewed(n + 1);
   std::vector<bool> prime_table(2 * n + 1);  // 质数表
-  int ans = 0;                             // 符合条件的数量
+  int ans = 0;                               // 符合条件的数量
 
   // Lambda: 输出结果
   auto output = [&n, &data](int depth) {

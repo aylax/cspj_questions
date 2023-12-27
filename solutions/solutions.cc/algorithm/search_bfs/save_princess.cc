@@ -7,6 +7,7 @@
 #include <iostream>
 #include <queue>
 #include <vector>
+
 // --------------------------------------------------------
 // 预声明
 // stdin redirect testdata/
@@ -20,18 +21,19 @@ using c2d = std::vector<std::vector<char>>;
 using v2d = std::vector<std::vector<bool>>;
 
 // --------------------------------------------------------
+// 定义迷宫对象
 struct maze {
   int row;
   int col;
   c2d map;
 };
 
-// 定义对象
+// 定义坐标对象
 struct pos {
   int x;
   int y;
 };
-
+// 定义结点对象
 struct node {
   pos cur;   // 当前位置坐标
   int cost;  // 移到当前位置花费的代价
@@ -55,10 +57,10 @@ void save_princess(maze data, pos first, pos last) {
 
   // 方位数组
   std::vector<pos> d4 = {
-      pos{x : +0, y : -1},  // North
-      pos{x : +0, y : +1},  // South
-      pos{x : -1, y : +0},  // West
-      pos{x : +1, y : +0},  // East
+      {x : +0, y : -1},  // North
+      {x : +0, y : +1},  // South
+      {x : -1, y : +0},  // West
+      {x : +1, y : +0},  // East
 
   };
 

@@ -23,10 +23,10 @@ using deque = std::deque<usize>;
 using array = std::vector<value>;
 
 // --------------------------------------------------------
-// 定义对象
+// 定义答案对象
 struct answer {
-  value maxval;
-  value minval;
+  value maxval;  // 窗口内最大值
+  value minval;  // 窗口内最小值
 };
 
 // --------------------------------------------------------

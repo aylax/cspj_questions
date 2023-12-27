@@ -7,6 +7,7 @@
 #include <cmath>
 #include <iostream>
 #include <vector>
+
 // --------------------------------------------------------
 // 预声明
 

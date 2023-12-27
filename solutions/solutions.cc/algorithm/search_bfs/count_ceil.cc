@@ -7,6 +7,7 @@
 #include <iostream>
 #include <queue>
 #include <vector>
+
 // --------------------------------------------------------
 // 预声明
 // stdin redirect testdata/
@@ -18,7 +19,7 @@
 // 设定类型别名
 
 // --------------------------------------------------------
-// 定义对象
+// 定义坐标对象
 struct pos {
   int x;
   int y;
@@ -59,10 +60,10 @@ void count_ceil() {
 
   // 方位数组
   std::vector<pos> d4 = {
-      pos{x : +0, y : -1},  // North
-      pos{x : +0, y : +1},  // South
-      pos{x : -1, y : +0},  // West
-      pos{x : +1, y : +0},  // East
+      {x : +0, y : -1},  // North
+      {x : +0, y : +1},  // South
+      {x : -1, y : +0},  // West
+      {x : +1, y : +0},  // East
 
   };
 

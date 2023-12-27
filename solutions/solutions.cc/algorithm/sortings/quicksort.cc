@@ -96,6 +96,8 @@ void quicksort(array &arr) {
   quickfn(arr, 0, arr.size() - 1);
 };
 
+// --------------------------------------------------------
+// Fn: Quick Sort Testing
 void test_quicksort() {
   usize n;
   std::cin >> n;

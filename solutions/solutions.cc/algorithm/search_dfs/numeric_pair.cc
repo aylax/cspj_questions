@@ -7,6 +7,7 @@
 #include <climits>
 #include <iostream>
 #include <vector>
+
 // --------------------------------------------------------
 // 预声明
 // stdin redirect testdata/
