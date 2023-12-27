@@ -86,7 +86,7 @@ void save_princess(maze data, pos first, pos last) {
   auto mark_visit = [&vmap](pos cur) -> void { vmap[cur.y][cur.x] = true; };
 
   // Lambda: 判断是否到达终点
-  auto reach_end = [&last](pos &cur) -> bool {
+  auto reach_end = [&last](pos cur) -> bool {
     return cur.x == last.x && cur.y == last.y;
   };
 

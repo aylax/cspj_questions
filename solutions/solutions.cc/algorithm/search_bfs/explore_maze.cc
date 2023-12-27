@@ -6,6 +6,7 @@
 // --------------------------------------------------------
 #include <iostream>
 #include <queue>
+#include <stack>
 #include <vector>
 
 // --------------------------------------------------------
@@ -26,6 +27,42 @@ struct pos {
 };
 
 // --------------------------------------------------------
+// Fn: 记录最短路径的路线, 通过在下一节点的位置处记录当前节点坐标
+void record(std::vector<std::vector<pos>> &pmap, pos next, pos cur) {
+  pmap[next.y][next.x] = {x : cur.x, y : cur.y};
+}
+
+// --------------------------------------------------------
+// Fn: 打印最短路径的路线, 通过迭代访问前驱节点, 直到到达起点, 然后依次打印节点
+void output(std::vector<std::vector<pos>> &pmap, pos start, pos cur) {
+  std::stack<pos> s;
+
+  // Lambda: 判断是否回到起点
+  auto reach_start = [](pos start, pos cur) -> bool {
+    return cur.x == start.x && cur.y == start.y;
+  };
+
+  // 足迹压栈
+  s.push({x : cur.x, y : cur.y});
+  do {
+    cur = s.top();
+    pos pre = pmap[cur.y][cur.x];
+    s.push({x : pre.x, y : pre.y});
+  } while (!reach_start(start, cur));
+
+  // 出栈打印
+  while (!s.empty()) {
+    cur = s.top();
+    std::cout << "-> (" << (cur.x + 1);
+    std::cout << ", " << (cur.y + 1);
+    std::cout << ")";
+    s.pop();
+  }
+
+  std::cout << "\n";
+}
+
+// --------------------------------------------------------
 // Fn: 探索迷宫问题
 // 题解: bfs广度优先搜索
 // 用队列记录四周的访问情况
@@ -36,6 +73,9 @@ void explore_maze() {
 
   // 存放地图点位信息
   std::vector<std::vector<char>> cmap(n, std::vector<char>(m));
+
+  // 存放行走的路径信息
+  std::vector<std::vector<pos>> pmap(n, std::vector<pos>(m));
 
   // 存放地图各个点位的访问情况: true 已访问; false 未访问
   std::vector<std::vector<bool>> vmap(n, std::vector<bool>(m));
@@ -78,7 +118,7 @@ void explore_maze() {
   auto mark_visit = [&vmap](pos cur) -> void { vmap[cur.y][cur.x] = true; };
 
   // Lambda: 判断是否到达终点
-  auto reach_end = [&b](pos &cur) -> bool {
+  auto reach_end = [&b](pos cur) -> bool {
     return cur.x == b.x && cur.y == b.y;
   };
 
@@ -105,6 +145,7 @@ void explore_maze() {
         next.y = cur.y + d.y;
         if (reachable(next)) {
           if (road_present(next) && !has_visited(next)) {
+            record(pmap, next, cur);
             mark_visit(next);
             q.push(next);
           }
@@ -116,8 +157,10 @@ void explore_maze() {
 
   // 从A点出发是否能到达B点
   bool ans = bfs(a);
-
   std::cout << (ans ? "YES" : "NO") << "\n";
+
+  // // 打印最短路径
+  // if (ans) output(pmap, a, b);
 }
 
 // --------------------------------------------------------
