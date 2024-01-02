@@ -21,7 +21,7 @@ using value = int;
 using array = std::vector<value>;
 
 // --------------------------------------------------------
-// Fn: Max 获取最小值
+// Fn: Max 获取最大值
 value max(value a, value b) { return a > b ? a : b; }
 
 // --------------------------------------------------------
