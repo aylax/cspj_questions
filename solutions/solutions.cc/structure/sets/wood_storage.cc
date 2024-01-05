@@ -29,15 +29,21 @@ struct line {
 };
 
 // --------------------------------------------------------
-// Fn: 获取与Val数值最相近的元素, 如果一样近,优先取较小元素
-template <typename set, typename key_type>
-decltype(auto) closest_elem(set& xs, const key_type& val) {
+// Fn: 升序集合中获取与<给定数值>最相似的元素
+// Note: 升序集合(默认), 如果相似度一样, 优先取较小元素
+// Tip: set.lower_bound(x) 表示
+// 从集合中找出, 第一个<大于或等于x>的元素的位置, 找不到就返回 set.end()
+template <typename set, typename set_key_type>
+decltype(auto) closest_element(set& xs, const set_key_type& val) {
+  // 升序集合, 如果只有一个元素, 就返回开头元素
   const auto next_it = xs.lower_bound(val);
   if (next_it == xs.begin()) return *next_it;
 
+  // 升序集合, 如果没有匹配元素, 就返回末尾元素
   const auto prev_it = std::prev(next_it);
   if (next_it == xs.end()) return *prev_it;
 
+  // 取最相似元素, 如果相似度一样, 优先取较小元素
   const auto diff_lb = val - *prev_it;
   const auto diff_rb = *next_it - val;
   return (diff_lb <= diff_rb) ? *prev_it : *next_it;
@@ -81,7 +87,7 @@ void wood_storage() {
     if (xs.empty()) {
       std::cout << "Empty\n";
     } else {
-      auto x = closest_elem(xs, val);
+      auto x = closest_element(xs, val);
       std::cout << x << "\n";
       xs.erase(x);
     }
