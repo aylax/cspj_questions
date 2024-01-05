@@ -36,17 +36,17 @@ struct line {
 template <typename set, typename set_key_type>
 decltype(auto) closest_element(set& xs, const set_key_type& val) {
   // 升序集合, 如果只有一个元素, 就返回开头元素
-  const auto next_it = xs.lower_bound(val);
-  if (next_it == xs.begin()) return *next_it;
+  const auto find_it = xs.lower_bound(val);
+  if (find_it == xs.begin()) return *find_it;
 
   // 升序集合, 如果没有匹配元素, 就返回末尾元素
-  const auto prev_it = std::prev(next_it);
-  if (next_it == xs.end()) return *prev_it;
+  const auto prev_it = std::prev(find_it);
+  if (find_it == xs.end()) return *prev_it;
 
   // 取最相似元素, 如果相似度一样, 优先取较小元素
   const auto diff_lb = val - *prev_it;
-  const auto diff_rb = *next_it - val;
-  return (diff_lb <= diff_rb) ? *prev_it : *next_it;
+  const auto diff_rb = *find_it - val;
+  return (diff_lb <= diff_rb) ? *prev_it : *find_it;
 }
 
 // --------------------------------------------------------
