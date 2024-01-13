@@ -16,14 +16,14 @@
 
 // --------------------------------------------------------
 // 设定类型别名
-using string = std::string;
+using str = std::string;
 using usize = int;
 
 // --------------------------------------------------------
 // 定义对象
-string dlr_seq;  // 前序遍历序列
-string ldr_seq;  // 中序遍历序列
-string lrd_seq;  // 后序遍历序列
+str dlr_seq;  // 前序遍历序列
+str ldr_seq;  // 中序遍历序列
+str lrd_seq;  // 后序遍历序列
 
 // 定义范围
 struct range {
