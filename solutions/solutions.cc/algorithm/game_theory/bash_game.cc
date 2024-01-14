@@ -40,7 +40,7 @@ void bash_game() {
 #endif
   bool ans = n % (k + 1) != 0;
 
-  std::cout << (ans ? "Alice" : "Blob") << "\n";
+  std::cout << (ans ? "Alice" : "Bob") << "\n";
 }
 
 // --------------------------------------------------------
