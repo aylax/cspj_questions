@@ -27,7 +27,7 @@ struct node {
 };
 
 // --------------------------------------------------------
-// cmap: 电梯移动问题
+// Fn: 电梯移动问题
 // 题解: bfs广度优先搜索
 // 用队列记录四周的访问情况
 void strange_lift() {
@@ -127,7 +127,7 @@ void strange_lift() {
 }
 
 // --------------------------------------------------------
-// cmap: Main
+// Fn: Main
 int main(int argc, char const *argv[]) {
   // std::cout << "c++ standard version: " << __cplusplus << "\n";
   strange_lift();

@@ -26,7 +26,7 @@ struct node {
 };
 
 // --------------------------------------------------------
-// cmap: 农夫捉牛问题
+// Fn: 农夫捉牛问题
 // 题解: bfs广度优先搜索
 // 用队列记录四周的访问情况
 void catch_cow() {
@@ -119,7 +119,7 @@ void catch_cow() {
 }
 
 // --------------------------------------------------------
-// cmap: Main
+// Fn: Main
 int main(int argc, char const *argv[]) {
   // std::cout << "c++ standard version: " << __cplusplus << "\n";
   catch_cow();

@@ -1,11 +1,11 @@
 // --------------------------------------------------------
-// File: 巴什博弈问题
+// File: 威佐夫博弈问题
 // Require: __cplusplus >= 201402
 // --------------------------------------------------------
 // Author: zbye
 // --------------------------------------------------------
+#include <cmath>
 #include <iostream>
-
 // --------------------------------------------------------
 // 预声明
 // stdin redirect testdata/
@@ -20,33 +20,43 @@
 // 定义节点对象
 
 // --------------------------------------------------------
-// Fn: 巴什博弈问题
+// Fn: 威佐夫博弈问题
 // 题解: 对策论思想，最先进入必胜状态
 // 分析:
 // 首先我们定义奇异局势为：选手面对奇异局势时必输。
 // 所以，对于博弈游戏的分析转化为寻找奇异局势。
-void bash_game() {
+// 先手必败局势: (0, 0), (1, 2) (3, 5), (4, 7) ...
+// 观察可以找出规律:
+// 1) 每一组元素的差值是递增的, 0-0=0, 2-1=1, 5-3=2, ...
+// 2) 每一组元素的第一个值 = 差值 * PHI(黄金比例1.618...)
+void wythoff_game() {
 #if _TESTDATA_
   // set "../testdata/.../xxx.in -> stdin
-  freopen("../testdata/algorithm/bash_game.in", "r", stdin);
+  freopen("../testdata/algorithm/wythoff_game.in", "r", stdin);
 #endif
 
-  int n, k;  // n枚石子, 每次最多取k个
-  std::cin >> n >> k;
+  int a, b;  // 第一堆a枚石子, 第二堆b枚石子
+  std::cin >> a >> b;
 
 #if _TESTDATA_
   // close stdin
   fclose(stdin);
 #endif
-  bool ans = n % (k + 1) != 0;
 
-  std::cout << (ans ? "Alice" : "Blob") << "\n";
+  if (a > b) std::swap(a, b);
+
+  // 计算黄金比例phi值
+  auto phi = (1.0 + std::sqrt(5.0)) / 2.0;
+  auto dif = (double)b - a;
+  int ret = std::floor(phi * dif);
+
+  std::cout << ((a != ret) ? "Alice" : "Blob") << "\n";
 }
 
 // --------------------------------------------------------
 // Fn: Main
 int main(int argc, char const *argv[]) {
   // std::cout << "c++ standard version: " << __cplusplus << "\n";
-  bash_game();
+  wythoff_game();
   return 0;
 }
