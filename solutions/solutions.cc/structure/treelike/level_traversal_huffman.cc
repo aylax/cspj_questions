@@ -1,5 +1,5 @@
 // --------------------------------------------------------
-// File: 构建哈夫曼树问题
+// File: 层序遍历哈夫曼树问题
 // Require: __cplusplus >= 201402
 // --------------------------------------------------------
 // Author: zbye
@@ -85,7 +85,7 @@ auto huffman(list &ds, std::vector<elem> &rd) {
 }
 
 // --------------------------------------------------------
-// Fn: huffman编码
+// Fn: 层序遍历huffman树
 void level_traversal(node *p) {
   if (p == nullptr) return;
   std::queue<node *> q;
@@ -105,7 +105,7 @@ void level_traversal(node *p) {
 }
 
 // --------------------------------------------------------
-// Fn: 构建哈夫曼树问题
+// Fn: 层序遍历哈夫曼树问题
 // 题解: 构建树形结构
 void level_traversal_huffman() {
 #if _TESTDATA_
