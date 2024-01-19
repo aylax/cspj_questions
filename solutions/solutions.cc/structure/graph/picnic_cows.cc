@@ -89,6 +89,8 @@ void picnic_cows() {
 
   svb visited(n + 1);  // 元素访问情况
   svi counter(n + 1);  // 元素访问次数
+
+  // Lambda: 批量更新视图
   auto batch_update_view = [&visited](bool state) {
     std::fill(visited.begin(), visited.end(), state);
   };

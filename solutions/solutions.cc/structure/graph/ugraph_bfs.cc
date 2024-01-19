@@ -78,7 +78,7 @@ void ugraph_bfs() {
 #endif
 
   // 升序排列
-  for (int u = 0; u < n; u++) {
+  for (int u = 1; u <= n; u++) {
     auto& ns = graph[u];
     if (ns.size() > 1) {
       std::sort(ns.begin(), ns.end());

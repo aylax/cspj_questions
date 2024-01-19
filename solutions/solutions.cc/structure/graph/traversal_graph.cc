@@ -27,8 +27,8 @@ using n2d = std::vector<std::vector<int>>;
 // --------------------------------------------------------
 // Fn : 深度遍历图(邻接表)
 void dfs(n2d& graph, int u) {
-  // 点位的访问标记
   int n = graph.size();
+  // 点位的访问标记
   std::vector<bool> visited(n + 1, false);
 
   // Lambda: 深度遍历
@@ -101,7 +101,7 @@ void traversal_graph() {
   fclose(stdin);
 #endif
 
-  for (int u = 0; u < n; u++) {
+  for (int u = 1; u <= n; u++) {
     auto& ns = graph[u];
     if (ns.size() > 1) {
       std::sort(ns.begin(), ns.end());
