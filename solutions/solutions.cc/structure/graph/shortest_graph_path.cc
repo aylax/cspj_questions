@@ -13,7 +13,7 @@
 // 预声明
 // stdin redirect testdata/
 #ifndef _TESTDATA_
-#define _TESTDATA_ 1  // 1: Open, 0: Close
+#define _TESTDATA_ 0  // 1: Open, 0: Close
 #endif
 
 #define inf 0x7fffffff  // 正无穷大
@@ -217,10 +217,12 @@ void shortest_graph_path() {
   fclose(stdin);
 #endif
 
-  int s = 3;  // 源点 s
-  floyd(graph, n, s);
+  int s = 1;  // 源点 s
+
+  
+  // floyd(graph, n, s);
   bellman_ford(graph, n, s);
-  dijkstra(graph, n, s);
+  // dijkstra(graph, n, s);
 }
 
 // --------------------------------------------------------
