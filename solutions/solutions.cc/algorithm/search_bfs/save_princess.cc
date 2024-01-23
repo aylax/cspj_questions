@@ -39,7 +39,9 @@ struct node {
   int cost;  // 移到当前位置花费的代价
 
   // 实现优先队列比较运算
-  friend bool operator<(const node a, const node b) { return a.cost > b.cost; }
+  friend bool operator<(const node &a, const node &b) {
+    return a.cost > b.cost;
+  }
 };
 
 // --------------------------------------------------------
